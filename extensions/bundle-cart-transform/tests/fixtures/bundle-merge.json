@@ -1,0 +1,147 @@
+{
+  "payload": {
+    "export": "cart-transform-run",
+    "target": "cart.transform.run",
+    "input": {
+      "cart": {
+        "lines": [
+          {
+            "id": "gid://shopify/CartLine/1",
+            "quantity": 1,
+            "cost": {
+              "amountPerQuantity": {
+                "amount": "15.00",
+                "currencyCode": "USD"
+              }
+            },
+            "merchandise": {
+              "__typename": "ProductVariant",
+              "id": "gid://shopify/ProductVariant/101",
+              "title": "Default Title",
+              "product": {
+                "id": "gid://shopify/Product/1",
+                "title": "Charcoal Everyday Notebook"
+              }
+            },
+            "bundleId": {
+              "value": "bundle_123"
+            },
+            "bundleTitle": {
+              "value": "Bundle Test Book"
+            },
+            "bundleDiscount": {
+              "value": "10"
+            },
+            "bundleCount": {
+              "value": "2"
+            },
+            "bundleParentId": {
+              "value": "50773507965026"
+            }
+          },
+          {
+            "id": "gid://shopify/CartLine/2",
+            "quantity": 1,
+            "cost": {
+              "amountPerQuantity": {
+                "amount": "15.00",
+                "currencyCode": "USD"
+              }
+            },
+            "merchandise": {
+              "__typename": "ProductVariant",
+              "id": "gid://shopify/ProductVariant/102",
+              "title": "Default Title",
+              "product": {
+                "id": "gid://shopify/Product/2",
+                "title": "Charcoal Everyday Pen"
+              }
+            },
+            "bundleId": {
+              "value": "bundle_123"
+            },
+            "bundleTitle": {
+              "value": "Bundle Test Book"
+            },
+            "bundleDiscount": {
+              "value": "10"
+            },
+            "bundleCount": {
+              "value": "2"
+            },
+            "bundleParentId": {
+              "value": "50773507965026"
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "operations": [
+        {
+          "linesMerge": {
+            "parentVariantId": "gid://shopify/ProductVariant/50773507965026",
+            "cartLines": [
+              {
+                "cartLineId": "gid://shopify/CartLine/1",
+                "quantity": 1
+              },
+              {
+                "cartLineId": "gid://shopify/CartLine/2",
+                "quantity": 1
+              }
+            ],
+            "price": {
+              "percentageDecrease": {
+                "value": "10"
+              }
+            },
+            "title": "Bundle Test Book",
+            "attributes": [
+              {
+                "key": "_bundle",
+                "value": "true"
+              },
+              {
+                "key": "_Bundle Name",
+                "value": "Bundle Test Book"
+              },
+              {
+                "key": "_bundle_id",
+                "value": "bundle_123"
+              },
+              {
+                "key": "_Original Price",
+                "value": "$30.00"
+              },
+              {
+                "key": "_Bundle Price",
+                "value": "$27.00"
+              },
+              {
+                "key": "_Discount",
+                "value": "10% OFF"
+              },
+              {
+                "key": "_Product 1",
+                "value": "Charcoal Everyday Notebook"
+              },
+              {
+                "key": "_Variant 1",
+                "value": "Default Title"
+              },
+              {
+                "key": "_Product 2",
+                "value": "Charcoal Everyday Pen"
+              },
+              {
+                "key": "_Variant 2",
+                "value": "Default Title"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

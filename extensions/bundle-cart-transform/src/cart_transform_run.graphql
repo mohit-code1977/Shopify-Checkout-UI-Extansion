@@ -1,0 +1,40 @@
+query CartTransformRunInput {
+  cart {
+    lines {
+      id
+      quantity
+      cost {
+        amountPerQuantity {
+          amount
+          currencyCode
+        }
+      }
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          id
+          title
+          product {
+            id
+            title
+          }
+        }
+      }
+      bundleId: attribute(key: "_bundle_id") {
+        value
+      }
+      bundleTitle: attribute(key: "_bundle_title") {
+        value
+      }
+      bundleDiscount: attribute(key: "_bundle_discount") {
+        value
+      }
+      bundleCount: attribute(key: "_bundle_count") {
+        value
+      }
+      bundleParentId: attribute(key: "_bundle_parent_id") {
+        value
+      }
+    }
+  }
+}

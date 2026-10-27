@@ -1,180 +1,98 @@
-import {useState, useEffect} from 'preact/hooks';
-import {useLocation} from 'preact-iso';
-import {listFAQs, primeFAQ} from '../../../../shared/models/faq';
-import {gidToId} from '../../../../shared/utils/gid';
-
-/** @typedef {import('../../../../shared/models/faq').FAQSummary} FAQSummary */
-
 export default function HomePage() {
-  const location = useLocation();
-  const [faqs, setFaqs] = useState(/** @type {FAQSummary[]} */ ([]));
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-      setFaqs(await listFAQs());
-      setLoading(false);
-    })();
-  }, []);
-
-  /**
-   * @param {Event} event
-   * @param {FAQSummary} faq
-   */
-  const openFAQ = (event, faq) => {
-    const mouseEvent = /** @type {MouseEvent} */ (event);
-    if (
-      mouseEvent.defaultPrevented ||
-      mouseEvent.button !== 0 ||
-      mouseEvent.metaKey ||
-      mouseEvent.altKey ||
-      mouseEvent.ctrlKey ||
-      mouseEvent.shiftKey
-    ) {
-      return;
-    }
-
-    const id = gidToId(faq.id);
-    mouseEvent.preventDefault();
-    primeFAQ(id, faq);
-    location.route(`/faq/${id}`);
-  };
-
-  const hasFaqs = faqs.length > 0;
-
   return (
-    <s-page heading="FAQs">
-      <s-button slot="primary-action" variant="primary" href="/faq/new">
-        Create FAQ
+    <s-page heading="Checkout Product Recommendations">
+      <s-button
+        slot="primary-action"
+        variant="primary"
+        href="shopify:admin/settings/checkout"
+      >
+        Customize in Checkout Editor
       </s-button>
 
-      {!loading && (
-        <s-section slot="aside" heading={shopify.i18n.translate('welcome', {target: shopify.extension.target})}>
+      {/* Main Status & Overview Section */}
+      <s-section heading="Extension Status">
+        <s-stack gap="base">
           <s-stack direction="inline" gap="small" alignItems="center">
-            <s-paragraph>
-              <s-text>Framework: </s-text>
-              <s-link href="https://preactjs.com/" target="_blank">
-                Preact
-              </s-link>
-            </s-paragraph>
-            <s-link href="https://preactjs.com/" target="_blank">
-              <s-box maxInlineSize="24px" maxBlockSize="24px">
-                <s-image src="./preact-logo.png" alt="Preact logo" />
-              </s-box>
-            </s-link>
+            <s-badge tone="success">Active</s-badge>
+            <s-text color="subdued">similar-collection-products</s-text>
           </s-stack>
-          <s-stack direction="inline" gap="small" alignItems="center">
-            <s-paragraph>
-              <s-text>Interface: </s-text>
-              <s-link
-                href="https://shopify.dev/docs/api/app-home/web-components"
-                target="_blank"
-              >
-                Polaris web components
-              </s-link>
-            </s-paragraph>
-            <s-link
-              href="https://shopify.dev/docs/api/app-home/web-components"
-              target="_blank"
-            >
-              <s-box maxInlineSize="32px" maxBlockSize="32px">
-                <s-image src="./polaris-icon.png" alt="Polaris logo" />
-              </s-box>
-            </s-link>
-          </s-stack>
-          <s-stack direction="inline" gap="small" alignItems="center">
-            <s-paragraph>
-              <s-text>API: </s-text>
-              <s-link
-                href="https://shopify.dev/docs/api/admin-graphql"
-                target="_blank"
-              >
-                GraphQL Admin API
-              </s-link>
-            </s-paragraph>
-            <s-link
-              href="https://shopify.dev/docs/api/admin-graphql"
-              target="_blank"
-            >
-              <s-box maxInlineSize="24px" maxBlockSize="24px">
-                <s-image src="./graphql-logo.png" alt="GraphQL logo" />
-              </s-box>
-            </s-link>
-          </s-stack>
+
           <s-paragraph>
-            <s-text>Database: </s-text>
-            <s-link
-              href="https://shopify.dev/docs/apps/build/custom-data/metaobjects"
-              target="_blank"
-            >
-              Metaobjects
-            </s-link>
+            Your checkout extension is live. It dynamically inspects items in the buyer's checkout cart and recommends available products from the exact same collection.
           </s-paragraph>
-        </s-section>
-      )}
+        </s-stack>
+      </s-section>
 
-      {!loading && !hasFaqs && (
-        <s-section accessibilityLabel="Empty state section">
-          <s-grid gap="base" justifyItems="center" paddingBlock="large-400">
-            <s-box maxInlineSize="200px" maxBlockSize="200px">
-              <s-image
-                aspectRatio="1/0.5"
-                src="https://cdn.shopify.com/static/images/polaris/patterns/callout.png"
-                alt="Illustration of FAQ creation"
-              />
-            </s-box>
-            <s-grid justifyItems="center" maxInlineSize="450px" gap="base">
-              <s-stack alignItems="center">
-                <s-heading>Start creating FAQs</s-heading>
-                <s-paragraph>
-                  Create frequently asked questions to boost sales.
-                </s-paragraph>
-              </s-stack>
-              <s-button-group>
-                <s-button
-                  slot="primary-action"
-                  accessibilityLabel="Add a new FAQ"
-                  href="/faq/new"
-                >
-                  Create FAQ
-                </s-button>
-              </s-button-group>
-            </s-grid>
-          </s-grid>
-        </s-section>
-      )}
+      {/* How It Works */}
+      <s-section heading="How It Works">
+        <s-grid gap="base">
+          <s-stack gap="small-100">
+            <s-text type="strong">1. Smart Same-Collection Detection</s-text>
+            <s-paragraph>
+              Inspects checkout line items to find their true collection, automatically filtering out store-wide collections like 'All' or 'Catalog'.
+            </s-paragraph>
+          </s-stack>
 
-      {!loading && hasFaqs && (
-        <s-section padding="none" accessibilityLabel="FAQs table section">
-          <s-table>
-            <s-table-header-row>
-              <s-table-header listSlot="primary">Question</s-table-header>
-              <s-table-header>FAQ page</s-table-header>
-            </s-table-header-row>
-            <s-table-body>
-              {faqs.map((faq) => (
-                <s-table-row key={faq.id}>
-                  <s-table-cell>
-                    <s-link
-                      href={`/faq/${gidToId(faq.id)}`}
-                      onClick={(event) => openFAQ(event, faq)}
-                    >
-                      {faq.question || 'Untitled'}
-                    </s-link>
-                  </s-table-cell>
-                  <s-table-cell>
-                    <s-badge
-                      tone={faq.show_on_faq_page ? 'auto' : 'neutral'}
-                    >
-                      {faq.show_on_faq_page ? 'Shown' : 'Hidden'}
-                    </s-badge>
-                  </s-table-cell>
-                </s-table-row>
-              ))}
-            </s-table-body>
-          </s-table>
-        </s-section>
-      )}
+          <s-divider />
+
+          <s-stack gap="small-100">
+            <s-text type="strong">2. Automated Duplicate Filtering</s-text>
+            <s-paragraph>
+              Never recommends products the customer already has in checkout. Only products with in-stock variants are shown.
+            </s-paragraph>
+          </s-stack>
+
+          <s-divider />
+
+          <s-stack gap="small-100">
+            <s-text type="strong">3. 1-Click Upsell Action</s-text>
+            <s-paragraph>
+              Customers can add recommended products directly into their order without leaving the checkout page.
+            </s-paragraph>
+          </s-stack>
+        </s-grid>
+      </s-section>
+
+      {/* Quick Placement Instructions */}
+      <s-section heading="Checkout Placement Guide">
+        <s-stack gap="small">
+          <s-paragraph>
+            To customize where the recommendations appear on your checkout:
+          </s-paragraph>
+          <s-ordered-list>
+            <s-list-item>
+              In Shopify Admin, go to <s-text type="strong">Settings &gt; Checkout</s-text>.
+            </s-list-item>
+            <s-list-item>
+              Click <s-text type="strong">Customize</s-text> next to your active checkout configuration.
+            </s-list-item>
+            <s-list-item>
+              Click <s-text type="strong">Add app block</s-text> in the sidebar or under line items.
+            </s-list-item>
+            <s-list-item>
+              Select <s-text type="strong">similar-collection-products</s-text> and drag it to your desired spot.
+            </s-list-item>
+          </s-ordered-list>
+        </s-stack>
+      </s-section>
+
+      {/* Aside details */}
+      <s-section slot="aside" heading="Extension Info">
+        <s-stack gap="small">
+          <s-stack direction="inline" justifyContent="space-between">
+            <s-text color="subdued">Target:</s-text>
+            <s-text type="strong">purchase.checkout.block.render</s-text>
+          </s-stack>
+          <s-stack direction="inline" justifyContent="space-between">
+            <s-text color="subdued">Surface:</s-text>
+            <s-text type="strong">Checkout &amp; Order Summary</s-text>
+          </s-stack>
+          <s-stack direction="inline" justifyContent="space-between">
+            <s-text color="subdued">API Access:</s-text>
+            <s-text type="strong">Storefront GraphQL</s-text>
+          </s-stack>
+        </s-stack>
+      </s-section>
     </s-page>
   );
 }

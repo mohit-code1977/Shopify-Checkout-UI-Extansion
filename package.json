@@ -13,10 +13,13 @@
     "generate": "shopify app generate",
     "deploy": "shopify app deploy"
   },
-  "dependencies": {},
   "trustedDependencies": [
     "@shopify/plugin-cloudflare"
   ],
   "author": "mohit",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@graphql-codegen/cli": "^7.4.6",
+    "@graphql-codegen/typescript": "^6.1.2"
+  }
 }

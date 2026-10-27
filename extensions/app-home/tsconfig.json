@@ -5,10 +5,11 @@
     "target": "ES2020",
     "checkJs": true,
     "allowJs": true,
-    "moduleResolution": "node",
-    "ignoreDeprecations": "6.0",
+    "moduleResolution": "Bundler",
     "esModuleInterop": true,
     "noEmit": true,
     "skipLibCheck": true
-  }
+  },
+  "include": ["./src", "./shopify.d.ts", "../similar-collection-products/src/BundleLineItem.jsx"],
+  "exclude": ["dist", "node_modules"]
 }

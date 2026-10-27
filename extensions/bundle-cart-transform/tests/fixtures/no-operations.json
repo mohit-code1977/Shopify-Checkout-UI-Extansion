@@ -1,0 +1,39 @@
+{
+  "payload": {
+    "export": "cart-transform-run",
+    "target": "cart.transform.run",
+    "input": {
+      "cart": {
+        "lines": [
+          {
+            "id": "gid://shopify/CartLine/1",
+            "quantity": 1,
+            "cost": {
+              "amountPerQuantity": {
+                "amount": "10.00",
+                "currencyCode": "USD"
+              }
+            },
+            "merchandise": {
+              "__typename": "ProductVariant",
+              "id": "gid://shopify/ProductVariant/1",
+              "title": "Regular Product",
+              "product": {
+                "id": "gid://shopify/Product/1",
+                "title": "Regular Product"
+              }
+            },
+            "bundleId": null,
+            "bundleTitle": null,
+            "bundleDiscount": null,
+            "bundleCount": null,
+            "bundleParentId": null
+          }
+        ]
+      }
+    },
+    "output": {
+      "operations": []
+    }
+  }
+}
