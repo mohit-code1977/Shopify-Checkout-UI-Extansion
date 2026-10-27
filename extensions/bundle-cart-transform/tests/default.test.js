@@ -43,3 +43,33 @@ describe("Default Integration Test", () => {
     }, 10000);
   });
 });
+
+describe("cleanShopifyCdnImageUrl Unit Tests", () => {
+  test("cleans Shopify CDN URLs without explicit resizing suffix", async () => {
+    const { cleanShopifyCdnImageUrl } = await import("../src/cart_transform_run.ts");
+
+    // 1. Valid original URL without resizing parameters
+    expect(
+      cleanShopifyCdnImageUrl("https://cdn.shopify.com/s/files/1/0818/7271/5874/files/theme_cover_image.jpg")
+    ).toBe("https://cdn.shopify.com/s/files/1/0818/7271/5874/files/theme_cover_image.jpg");
+
+    // 2. Strips ?width=800 resizing parameter
+    expect(
+      cleanShopifyCdnImageUrl("https://cdn.shopify.com/s/files/1/0818/7271/5874/files/theme_cover_image.jpg?v=1730000000&width=800")
+    ).toBe("https://cdn.shopify.com/s/files/1/0818/7271/5874/files/theme_cover_image.jpg?v=1730000000");
+
+    // 3. Strips legacy filename resizing suffix like _800x800
+    expect(
+      cleanShopifyCdnImageUrl("https://cdn.shopify.com/s/files/1/0818/7271/5874/files/daily-essentials-bundle_800x800.png")
+    ).toBe("https://cdn.shopify.com/s/files/1/0818/7271/5874/files/daily-essentials-bundle.png");
+
+    // 4. Prepend https: to protocol-relative URLs
+    expect(
+      cleanShopifyCdnImageUrl("//cdn.shopify.com/s/files/1/0818/7271/5874/files/daily-essentials-bundle.png")
+    ).toBe("https://cdn.shopify.com/s/files/1/0818/7271/5874/files/daily-essentials-bundle.png");
+
+    // 5. Rejects non-Shopify CDN domains
+    expect(cleanShopifyCdnImageUrl("https://external-domain.com/image.jpg")).toBeNull();
+  });
+});
+

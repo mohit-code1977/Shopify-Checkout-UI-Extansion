@@ -37,6 +37,9 @@
             },
             "bundleParentId": {
               "value": "50773507965026"
+            },
+            "bundleImage": {
+              "value": "https://cdn.shopify.com/s/files/1/0000/0001/files/bundle-test-book.jpg"
             }
           },
           {
@@ -71,6 +74,9 @@
             },
             "bundleParentId": {
               "value": "50773507965026"
+            },
+            "bundleImage": {
+              "value": "https://cdn.shopify.com/s/files/1/0000/0001/files/bundle-test-book.jpg"
             }
           }
         ]
@@ -96,6 +102,9 @@
                 "value": "10"
               }
             },
+            "image": {
+              "url": "https://cdn.shopify.com/s/files/1/0000/0001/files/bundle-test-book.jpg"
+            },
             "title": "Bundle Test Book",
             "attributes": [
               {
@@ -117,6 +126,10 @@
               {
                 "key": "_Bundle Price",
                 "value": "$27.00"
+              },
+              {
+                "key": "_bundle_image",
+                "value": "https://cdn.shopify.com/s/files/1/0000/0001/files/bundle-test-book.jpg"
               },
               {
                 "key": "_Discount",

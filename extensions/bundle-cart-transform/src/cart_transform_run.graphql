@@ -35,6 +35,9 @@ query CartTransformRunInput {
       bundleParentId: attribute(key: "_bundle_parent_id") {
         value
       }
+      bundleImage: attribute(key: "_bundle_image") {
+        value
+      }
     }
   }
 }

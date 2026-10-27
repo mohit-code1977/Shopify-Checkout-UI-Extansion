@@ -1,0 +1,65 @@
+{
+  "payload": {
+    "export": "cart-transform-run",
+    "target": "cart.transform.run",
+    "input": {
+      "cart": {
+        "lines": [
+          {
+            "id": "gid://shopify/CartLine/native_1",
+            "quantity": 1,
+            "cost": {
+              "amountPerQuantity": {
+                "amount": "27.00",
+                "currencyCode": "USD"
+              }
+            },
+            "merchandise": {
+              "__typename": "ProductVariant",
+              "id": "gid://shopify/ProductVariant/50777502646370",
+              "title": "Default Title",
+              "product": {
+                "id": "gid://shopify/Product/10354716409954",
+                "title": "Bundle Test Book"
+              }
+            },
+            "bundleId": null,
+            "bundleTitle": null,
+            "bundleDiscount": null,
+            "bundleCount": null,
+            "bundleParentId": null,
+            "bundleImage": null
+          },
+          {
+            "id": "gid://shopify/CartLine/native_2",
+            "quantity": 1,
+            "cost": {
+              "amountPerQuantity": {
+                "amount": "45.92",
+                "currencyCode": "USD"
+              }
+            },
+            "merchandise": {
+              "__typename": "ProductVariant",
+              "id": "gid://shopify/ProductVariant/50777505202274",
+              "title": "Default Title",
+              "product": {
+                "id": "gid://shopify/Product/10354717261922",
+                "title": "Bundle Daily Need Products"
+              }
+            },
+            "bundleId": null,
+            "bundleTitle": null,
+            "bundleDiscount": null,
+            "bundleCount": null,
+            "bundleParentId": null,
+            "bundleImage": null
+          }
+        ]
+      }
+    },
+    "output": {
+      "operations": []
+    }
+  }
+}

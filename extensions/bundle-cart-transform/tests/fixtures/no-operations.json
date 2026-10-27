@@ -27,7 +27,8 @@
             "bundleTitle": null,
             "bundleDiscount": null,
             "bundleCount": null,
-            "bundleParentId": null
+            "bundleParentId": null,
+            "bundleImage": null
           }
         ]
       }

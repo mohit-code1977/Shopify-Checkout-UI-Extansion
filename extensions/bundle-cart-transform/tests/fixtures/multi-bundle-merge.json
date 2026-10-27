@@ -1,0 +1,304 @@
+{
+  "payload": {
+    "export": "cart-transform-run",
+    "target": "cart.transform.run",
+    "input": {
+      "cart": {
+        "lines": [
+          {
+            "id": "gid://shopify/CartLine/1",
+            "quantity": 1,
+            "cost": {
+              "amountPerQuantity": {
+                "amount": "15.00",
+                "currencyCode": "USD"
+              }
+            },
+            "merchandise": {
+              "__typename": "ProductVariant",
+              "id": "gid://shopify/ProductVariant/101",
+              "title": "Default Title",
+              "product": {
+                "id": "gid://shopify/Product/1",
+                "title": "Charcoal Everyday Notebook"
+              }
+            },
+            "bundleId": {
+              "value": "bundle_test_book_1"
+            },
+            "bundleTitle": {
+              "value": "Bundle Test Book"
+            },
+            "bundleDiscount": {
+              "value": "10"
+            },
+            "bundleCount": {
+              "value": "2"
+            },
+            "bundleParentId": {
+              "value": "50773507965026"
+            },
+            "bundleImage": {
+              "value": "https://cdn.shopify.com/s/files/1/0818/7271/5874/files/theme_cover_image.jpg"
+            }
+          },
+          {
+            "id": "gid://shopify/CartLine/2",
+            "quantity": 1,
+            "cost": {
+              "amountPerQuantity": {
+                "amount": "15.00",
+                "currencyCode": "USD"
+              }
+            },
+            "merchandise": {
+              "__typename": "ProductVariant",
+              "id": "gid://shopify/ProductVariant/102",
+              "title": "Default Title",
+              "product": {
+                "id": "gid://shopify/Product/2",
+                "title": "Charcoal Everyday Pen"
+              }
+            },
+            "bundleId": {
+              "value": "bundle_test_book_1"
+            },
+            "bundleTitle": {
+              "value": "Bundle Test Book"
+            },
+            "bundleDiscount": {
+              "value": "10"
+            },
+            "bundleCount": {
+              "value": "2"
+            },
+            "bundleParentId": {
+              "value": "50773507965026"
+            },
+            "bundleImage": {
+              "value": "https://cdn.shopify.com/s/files/1/0818/7271/5874/files/theme_cover_image.jpg"
+            }
+          },
+          {
+            "id": "gid://shopify/CartLine/3",
+            "quantity": 1,
+            "cost": {
+              "amountPerQuantity": {
+                "amount": "20.00",
+                "currencyCode": "USD"
+              }
+            },
+            "merchandise": {
+              "__typename": "ProductVariant",
+              "id": "gid://shopify/ProductVariant/201",
+              "title": "Default Title",
+              "product": {
+                "id": "gid://shopify/Product/3",
+                "title": "Daily Need Item 1"
+              }
+            },
+            "bundleId": {
+              "value": "bundle_daily_need_2"
+            },
+            "bundleTitle": {
+              "value": "Bundle Daily Need Products"
+            },
+            "bundleDiscount": {
+              "value": "10"
+            },
+            "bundleCount": {
+              "value": "2"
+            },
+            "bundleParentId": {
+              "value": "50773507965026"
+            },
+            "bundleImage": {
+              "value": "https://cdn.shopify.com/s/files/1/0818/7271/5874/files/daily-essentials-bundle.png"
+            }
+          },
+          {
+            "id": "gid://shopify/CartLine/4",
+            "quantity": 1,
+            "cost": {
+              "amountPerQuantity": {
+                "amount": "20.00",
+                "currencyCode": "USD"
+              }
+            },
+            "merchandise": {
+              "__typename": "ProductVariant",
+              "id": "gid://shopify/ProductVariant/202",
+              "title": "Default Title",
+              "product": {
+                "id": "gid://shopify/Product/4",
+                "title": "Daily Need Item 2"
+              }
+            },
+            "bundleId": {
+              "value": "bundle_daily_need_2"
+            },
+            "bundleTitle": {
+              "value": "Bundle Daily Need Products"
+            },
+            "bundleDiscount": {
+              "value": "10"
+            },
+            "bundleCount": {
+              "value": "2"
+            },
+            "bundleParentId": {
+              "value": "50773507965026"
+            },
+            "bundleImage": {
+              "value": "https://cdn.shopify.com/s/files/1/0818/7271/5874/files/daily-essentials-bundle.png"
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "operations": [
+        {
+          "linesMerge": {
+            "parentVariantId": "gid://shopify/ProductVariant/50773507965026",
+            "cartLines": [
+              {
+                "cartLineId": "gid://shopify/CartLine/1",
+                "quantity": 1
+              },
+              {
+                "cartLineId": "gid://shopify/CartLine/2",
+                "quantity": 1
+              }
+            ],
+            "price": {
+              "percentageDecrease": {
+                "value": "10"
+              }
+            },
+            "image": {
+              "url": "https://cdn.shopify.com/s/files/1/0818/7271/5874/files/theme_cover_image.jpg"
+            },
+            "title": "Bundle Test Book",
+            "attributes": [
+              {
+                "key": "_bundle",
+                "value": "true"
+              },
+              {
+                "key": "_Bundle Name",
+                "value": "Bundle Test Book"
+              },
+              {
+                "key": "_bundle_id",
+                "value": "bundle_test_book_1"
+              },
+              {
+                "key": "_Original Price",
+                "value": "$30.00"
+              },
+              {
+                "key": "_Bundle Price",
+                "value": "$27.00"
+              },
+              {
+                "key": "_bundle_image",
+                "value": "https://cdn.shopify.com/s/files/1/0818/7271/5874/files/theme_cover_image.jpg"
+              },
+              {
+                "key": "_Discount",
+                "value": "10% OFF"
+              },
+              {
+                "key": "_Product 1",
+                "value": "Charcoal Everyday Notebook"
+              },
+              {
+                "key": "_Variant 1",
+                "value": "Default Title"
+              },
+              {
+                "key": "_Product 2",
+                "value": "Charcoal Everyday Pen"
+              },
+              {
+                "key": "_Variant 2",
+                "value": "Default Title"
+              }
+            ]
+          }
+        },
+        {
+          "linesMerge": {
+            "parentVariantId": "gid://shopify/ProductVariant/50773507965026",
+            "cartLines": [
+              {
+                "cartLineId": "gid://shopify/CartLine/3",
+                "quantity": 1
+              },
+              {
+                "cartLineId": "gid://shopify/CartLine/4",
+                "quantity": 1
+              }
+            ],
+            "price": {
+              "percentageDecrease": {
+                "value": "10"
+              }
+            },
+            "image": {
+              "url": "https://cdn.shopify.com/s/files/1/0818/7271/5874/files/daily-essentials-bundle.png"
+            },
+            "title": "Bundle Daily Need Products",
+            "attributes": [
+              {
+                "key": "_bundle",
+                "value": "true"
+              },
+              {
+                "key": "_Bundle Name",
+                "value": "Bundle Daily Need Products"
+              },
+              {
+                "key": "_bundle_id",
+                "value": "bundle_daily_need_2"
+              },
+              {
+                "key": "_Original Price",
+                "value": "$40.00"
+              },
+              {
+                "key": "_Bundle Price",
+                "value": "$36.00"
+              },
+              {
+                "key": "_bundle_image",
+                "value": "https://cdn.shopify.com/s/files/1/0818/7271/5874/files/daily-essentials-bundle.png"
+              },
+              {
+                "key": "_Discount",
+                "value": "10% OFF"
+              },
+              {
+                "key": "_Product 1",
+                "value": "Daily Need Item 1"
+              },
+              {
+                "key": "_Variant 1",
+                "value": "Default Title"
+              },
+              {
+                "key": "_Product 2",
+                "value": "Daily Need Item 2"
+              },
+              {
+                "key": "_Variant 2",
+                "value": "Default Title"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

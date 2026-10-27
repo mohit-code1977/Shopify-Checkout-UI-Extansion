@@ -17,6 +17,37 @@ function formatGid(id: string, type = "ProductVariant"): string {
   return `gid://shopify/${type}/${id}`;
 }
 
+export function cleanShopifyCdnImageUrl(rawUrl: string): string | null {
+  if (!rawUrl || typeof rawUrl !== "string") {
+    return null;
+  }
+  let url = rawUrl.trim();
+  if (url.startsWith("//")) {
+    url = `https:${url}`;
+  }
+  const isShopifyCdn =
+    url.startsWith("https://cdn.shopify.com/") ||
+    url.startsWith("http://cdn.shopify.com/") ||
+    /^https?:\/\/[^\/]+\.myshopify\.com\//.test(url);
+
+  if (!isShopifyCdn) {
+    return null;
+  }
+
+  // Remove legacy file resizing suffix before extension (e.g., _800x800.jpg, _grande.png)
+  url = url.replace(
+    /_(?:pico|icon|thumb|small|compact|medium|large|grande|original|1024x1024|2048x2048|master|(?:\d+x\d*)|(?:x\d+))(?=\.[a-zA-Z0-9]+(?:\?|$))/i,
+    ""
+  );
+
+  // Remove resizing query parameters: width, height, crop
+  url = url.replace(/([?&])(?:width|height|crop)=[^&#]*/gi, "$1");
+  // Clean up any double delimiters or trailing delimiter
+  url = url.replace(/[?&]&+/g, "&").replace(/\?&/, "?").replace(/[?&]$/, "");
+
+  return url;
+}
+
 export function cartTransformRun(input: CartTransformRunInput): CartTransformRunResult {
   const operations: Operation[] = [];
 
@@ -67,6 +98,17 @@ export function cartTransformRun(input: CartTransformRunInput): CartTransformRun
 
     const bundleTitle = firstLine.bundleTitle?.value?.trim() || "Bundle";
 
+    // Extract bundle image from component line attributes if present
+    const rawBundleImage = firstLine.bundleImage?.value?.trim();
+    let imageOverride: { url: string } | undefined = undefined;
+
+    if (rawBundleImage) {
+      const cleanedUrl = cleanShopifyCdnImageUrl(rawBundleImage);
+      if (cleanedUrl) {
+        imageOverride = { url: cleanedUrl };
+      }
+    }
+
     // Calculate real catalog original and discounted prices from Shopify component lines
     let totalComponentPrice = 0;
     for (const line of lines) {
@@ -86,6 +128,12 @@ export function cartTransformRun(input: CartTransformRunInput): CartTransformRun
       { key: "_Original Price", value: `$${totalComponentPrice.toFixed(2)}` },
       { key: "_Bundle Price", value: `$${discountedPrice.toFixed(2)}` },
     ];
+
+    if (imageOverride?.url) {
+      attributes.push({ key: "_bundle_image", value: imageOverride.url });
+    } else if (rawBundleImage) {
+      attributes.push({ key: "_bundle_image", value: rawBundleImage });
+    }
 
     if (discountPercent > 0) {
       attributes.push({ key: "_Discount", value: `${discountPercent}% OFF` });
@@ -120,6 +168,7 @@ export function cartTransformRun(input: CartTransformRunInput): CartTransformRun
           quantity: line.quantity,
         })),
         price: priceAdjustment,
+        image: imageOverride,
         title: bundleTitle,
         attributes,
       },
